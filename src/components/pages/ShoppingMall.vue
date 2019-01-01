@@ -22,6 +22,18 @@
             </van-swipe>
         </div>
 
+        <div class="type-bar">
+            <div v-for="(item,index) in category" :key="index">
+                <img :src="item.image" alt="">
+                <span>{{item.mallCategoryName}}</span>
+            </div>
+        </div>
+
+        <div>
+            <img v-lazy="adPic" alt="" width="100%">
+        </div>
+
+
     </div>
 </template>
 
@@ -31,12 +43,28 @@ export default {
         return {
             locationIcon: require('../../assets/icon/location.png'),
             bannerArr: [
-                {bannerUrl: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1546186074581&di=2c45e29d5389a3f136a0e6c011ada1dc&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01c350598440cc000000212954941d.jpg%401280w_1l_2o_100sh.png'},
-                {bannerUrl: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1546185939244&di=b64bf39c0f1851577af7f7c9500dddc8&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F0183145a0165e4a801216a4b97a488.jpg%402o.jpg'},
-                {bannerUrl: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1546186005716&di=3d52b0e0a93861fac736dd26af502dcd&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F0154345a0165eca801202b0cfd379e.jpg%402o.jpg'}
-            ]
+                {bannerUrl: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1546201179313&di=0d66d92280a413cb0a99816149bac950&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01fc7b5a5eec8aa8012113c719df80.png%401280w_1l_2o_100sh.png'},
+                {bannerUrl: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1546201179315&di=5039076727cc8897f51df7c4d7a372c4&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01f18059b8c6f4a801212fb7626afe.png%401280w_1l_2o_100sh.png'},
+                {bannerUrl: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1546201179308&di=3c0bbf37cc1fc2acb59935f0ad828f73&imgtype=0&src=http%3A%2F%2Fpic.iocode.cc%2F43139896_201706282240550939969457.jpg'}
+            ],
+            category: [],
+            adPic: '',
         }
     },
+    created() {
+        this.axios({
+            url:'https://easy-mock.com/mock/5c28cf159dc44f3d782e5864/mallApp/home',
+            method:'get',
+        }).then(response=>{
+            console.log(response)
+            if(response.status == 200){
+                this.category = response.data.data.category;
+                this.adPic = response.data.data.advertesPicture.PICTURE_ADDRESS;
+            }
+        }).catch(error=>{
+            console.log(error)
+        })
+    }
 }
 </script>
 
@@ -66,5 +94,22 @@ export default {
         clear: both;
         max-height: 15rem;
         overflow: hidden;
+    }
+    .type-bar{
+        background-color: #fff;
+        margin:0 .3rem .3rem .3rem;
+        border-radius: .3rem;
+        font-size:14px;
+        display: flex;
+        flex-direction:row;
+        flex-wrap:nowrap;
+    }
+    .type-bar div{
+        padding: .3rem;
+        font-size: 12px;
+        text-align: center;
+    }
+    .type-bar div img{
+        width: 3rem;
     }
 </style>
