@@ -33,12 +33,31 @@
             <img v-lazy="adPic" alt="" width="100%">
         </div>
 
+        <div class="recommend-area">
+            <div class="recommend-title">
+                商品推荐
+            </div>
+            <div class="recommend-body">
+                <swiper :options="swiperOption">
+                    <swiper-slide class="swiper-slide" v-for="(item, index) in recommendGoods" :key="index">
+                        <div class="recommend-item">
+                            <img :src="item.image" width="80%">
+                            <div>{{item.goodsName}}</div>
+                            <div>￥{{item.price}}(￥{{item.mallPrice}})</div>
+                        </div>
+                    </swiper-slide>
+                </swiper>
+            </div>
+        </div>
 
     </div>
 </template>
 
 <script>
+import 'swiper/dist/css/swiper.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
+    components:{swiper,swiperSlide},
     data() {
         return {
             locationIcon: require('../../assets/icon/location.png'),
@@ -49,6 +68,10 @@ export default {
             ],
             category: [],
             adPic: '',
+            recommendGoods: [],
+            swiperOption:{
+                slidesPerView: 3
+            }
         }
     },
     created() {
@@ -60,6 +83,7 @@ export default {
             if(response.status == 200){
                 this.category = response.data.data.category;
                 this.adPic = response.data.data.advertesPicture.PICTURE_ADDRESS;
+                this.recommendGoods = response.data.data.recommend;
             }
         }).catch(error=>{
             console.log(error)
@@ -111,5 +135,24 @@ export default {
     }
     .type-bar div img{
         width: 3rem;
+    }
+    .recommend-area{
+        background: #ffffff;
+        margin-top: 0.3rem;
+    }
+    .recommend-title{
+        border-bottom: 1px solid #eee;
+        font-size: 14px;
+        color: #4291ab;
+        padding-left: 0.3rem;
+    }
+    .recommend-body{
+        border-bottom: 1px solid #eee;
+    }
+    .recommend-item{
+        width: 99%;
+        border-right: 1px solid #eee;
+        font-size: 12px;
+        text-align: center;
     }
 </style>
