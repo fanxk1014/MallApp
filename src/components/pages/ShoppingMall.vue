@@ -50,7 +50,9 @@
             </div>
         </div>
 
-        <floorComponent :floorData="floor1"></floorComponent>
+        <floorComponent :floorData="floor1" :floorTitle="floorName.floor1"></floorComponent>
+        <floorComponent :floorData="floor2" :floorTitle="floorName.floor2"></floorComponent>
+        <floorComponent :floorData="floor3" :floorTitle="floorName.floor3"></floorComponent>
 
     </div>
 </template>
@@ -76,7 +78,9 @@ export default {
                 slidesPerView: 3
             },
             floor1: [],
-
+            floor2: [],
+            floor3: [],
+            floorName:{} 
         }
     },
     created() {
@@ -90,6 +94,9 @@ export default {
                 this.adPic = response.data.data.advertesPicture.PICTURE_ADDRESS;
                 this.recommendGoods = response.data.data.recommend;
                 this.floor1 = response.data.data.floor1;
+                this.floor2 = response.data.data.floor2;
+                this.floor3 = response.data.data.floor3;
+                this.floorName = response.data.data.floorName;
             }
         }).catch(error=>{
             console.log(error)
