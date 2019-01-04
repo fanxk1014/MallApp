@@ -50,14 +50,17 @@
             </div>
         </div>
 
+        <floorComponent :floorData="floor1"></floorComponent>
+
     </div>
 </template>
 
 <script>
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import floorComponent from '../component/floorComponent'
 export default {
-    components:{swiper,swiperSlide},
+    components:{swiper,swiperSlide,floorComponent},
     data() {
         return {
             locationIcon: require('../../assets/icon/location.png'),
@@ -71,7 +74,9 @@ export default {
             recommendGoods: [],
             swiperOption:{
                 slidesPerView: 3
-            }
+            },
+            floor1: [],
+
         }
     },
     created() {
@@ -79,11 +84,12 @@ export default {
             url:'https://easy-mock.com/mock/5c28cf159dc44f3d782e5864/mallApp/home',
             method:'get',
         }).then(response=>{
-            console.log(response)
+            console.log(response.data.data)
             if(response.status == 200){
                 this.category = response.data.data.category;
                 this.adPic = response.data.data.advertesPicture.PICTURE_ADDRESS;
                 this.recommendGoods = response.data.data.recommend;
+                this.floor1 = response.data.data.floor1;
             }
         }).catch(error=>{
             console.log(error)
@@ -154,5 +160,37 @@ export default {
         border-right: 1px solid #eee;
         font-size: 12px;
         text-align: center;
+    }
+    .floor-anomaly{
+      display: flex;
+      flex-direction:row;
+      background-color: #fff;
+      border-bottom:1px solid #ddd;
+    }
+    .floor-anomaly div{
+        width:10rem;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+    .floor-one{
+        border-right:1px solid #ddd;
+    }
+    .floor-two{
+        border-bottom:1px solid #ddd;
+    }
+    .floor-rule{
+        display: flex;
+        flex-direction: row;
+        flex-wrap:wrap;
+        background-color: #fff;
+    }
+    .floor-rule div{
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        width:10rem;
+        border-bottom:1px solid #ddd;
+    }
+    .floor-rule div:nth-child(odd){
+        border-right: 1px solid #ddd;
     }
 </style>
