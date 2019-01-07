@@ -105,9 +105,7 @@ export default {
         }  
     },
     created() {
-        console.log(this.URL);
         this.axios({
-            // url:'https://easy-mock.com/mock/5c28cf159dc44f3d782e5864/mallApp/home',
             url: this.$url.getShoppingMallInfo,
             method:'get',
         }).then(response=>{
