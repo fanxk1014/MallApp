@@ -7,11 +7,13 @@ exports.connect=()=>{
 
     mongoose.connection.on('disconnected',()=>{
         //进行重连
+        console.log('*******************数据库错误');
         mongoose.connect(db);
     })
 
     //数据库报错
     mongoose.connection.on('error',err=>{
+        console.log('*******************数据库错误');
         console.log(err);
         mongoose.connect(db);
     })
