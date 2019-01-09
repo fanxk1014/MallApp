@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 let ObjectId = Schema.Types.ObjectId
+const bcrypt = require('bcryptjs')
+const SALT_WORK_FACTOR = 10
 
 const userSchema = new Schema({
     UserId: ObjectId,
@@ -20,8 +22,7 @@ const userSchema = new Schema({
 })
 
 userSchema.pre('save', function(next){
-    //let user = this
-    console.log(this)
+    
     bcrypt.genSalt( SALT_WORK_FACTOR,(err,salt)=>{
         if(err) return next(err)
         bcrypt.hash(this.password,salt, (err,hash)=>{

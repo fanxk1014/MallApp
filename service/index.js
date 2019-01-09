@@ -9,20 +9,20 @@ const { connect, initSchemas } = require('./database/init.js')
 
     const User = mongoose.model('User');
     let oneUser = new User({
-        userName:'xiaokun01',
+        userName:'xiaokun04',
         password:'123456'
     })
 
     //插入数据
     oneUser.save().then(()=>{
-        console.log('数据插入成功');
+        console.log('---------------数据插入成功---------------');
     })
 
     //查询
-    let  users = await  User.findOne({}).exec()
-    console.log('------------------')
-    console.log(users)
-    console.log('------------------')
+    // let  users = await  User.findOne({}).exec()
+    // console.log('------------------')
+    // console.log(users)
+    // console.log('------------------')
 
 })()
 
