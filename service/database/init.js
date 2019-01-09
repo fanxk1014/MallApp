@@ -1,6 +1,14 @@
 const mongoose = require('mongoose')
 const db = 'mongodb://localhost/mall-db'
+const glob = require('glob')
+const { resolve } = require('path')
 
+//一次性引入所有的Schema
+exports.initSchemas=()=>{
+    glob.sync(resolve(__dirname,'./schema/','**/*.js')).forEach(require)
+}
+
+//连接数据库
 exports.connect=()=>{
     //连接数据库
     mongoose.connect(db);
