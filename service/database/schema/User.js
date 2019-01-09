@@ -1,10 +1,13 @@
 const mongoose = require('mongoose')
-const Scheme = mongoose.Schema
-let ObjectId = Scheme.Types.ObjectId
+const Schema = mongoose.Schema
+let ObjectId = Schema.Types.ObjectId
 
 const userSchema = new Schema({
     UserId: ObjectId,
-    userName: {type:String},
+    userName: {
+        unique:true,
+        type:String
+    },
     password: String,
     createAt: {
         type:Date,
@@ -16,4 +19,5 @@ const userSchema = new Schema({
     }
 })
 
+//发布模型
 mongoose.model('User',userSchema)
