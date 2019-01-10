@@ -5,9 +5,9 @@ const { connect, initSchemas } = require('./database/init.js')
 const Router = require('koa-router')
 
 let user = require('./controller/user.js')
+let router = new Router()
 
 //装在所有子路由
-let router = new Router();
 router.use('/user',user.routes())
 
 //加载路由中间件
