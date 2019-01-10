@@ -9,7 +9,7 @@ const { connect, initSchemas } = require('./database/init.js')
 
     const User = mongoose.model('User');
     let oneUser = new User({
-        userName:'xiaokun04',
+        userName:'xiaokun',
         password:'123456'
     })
 
