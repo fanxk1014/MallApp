@@ -25,7 +25,7 @@
                 required
             />
             <div class="register-button">
-                <van-button type="primary" class="register-btn" size="large">注册</van-button>
+                <van-button type="primary" class="register-btn" size="large" @click="axiosRegisterUser">注册</van-button>
             </div>
        </div>
 
@@ -43,6 +43,22 @@
         methods: {
             goBack() {
                 this.$router.go(-1);
+            },
+            axiosRegisterUser(){
+                this.axios({
+                    url: this.$url.registerUser,
+                    method: 'post',
+                    data:{
+                        username:this.username,
+                        password:this.password 
+                    }
+                })
+                .then(response => {
+                    console.log(response)
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
             }
         },
     }

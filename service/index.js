@@ -1,13 +1,21 @@
 const Koa = require('koa')
-const app = new Koa()
 const mongoose = require('mongoose')
-const { connect, initSchemas } = require('./database/init.js')
 const Router = require('koa-router')
+const bodyParse = require('koa-bodyparser')
+const { connect, initSchemas } = require('./database/init.js')
+const cors = require('koa2-cors')
+const app = new Koa()
+
+//用于接收前端请求
+app.use(bodyParse())
+
+//用于跨域
+app.use(cors())
 
 let user = require('./controller/user.js')
 let router = new Router()
 
-//装在所有子路由
+//装在user下所有子路由
 router.use('/user',user.routes())
 
 //加载路由中间件
