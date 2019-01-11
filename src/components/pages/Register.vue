@@ -25,7 +25,7 @@
                 required
             />
             <div class="register-button">
-                <van-button type="primary" class="register-btn" size="large" @click="axiosRegisterUser">注册</van-button>
+                <van-button type="primary" class="register-btn" :loading="openLoading" size="large" @click="axiosRegisterUser">注册</van-button>
             </div>
        </div>
 
@@ -39,6 +39,7 @@
             return {
                 username: '',
                 password: '',
+                openLoading: false, //是否开启用户的Loading
             }
         },
         methods: {
@@ -46,11 +47,12 @@
                 this.$router.go(-1);
             },
             axiosRegisterUser(){
+                this.openLoading = true;
                 this.axios({
                     url: this.$url.registerUser,
                     method: 'post',
                     data:{
-                        username:this.username,
+                        userName:this.username,
                         password:this.password 
                     }
                 })
@@ -58,12 +60,15 @@
                     console.log(response)
                     //如果返回code为200，代表注册成功，我们给用户作Toast提示
                     if(response.data.code == 200){
-                        Toast.success('注册成功')
+                        Toast.success('注册成功');
+                        // this.$router.push('/');
                     }else{
                         console.log(response.data.message)
                         Toast.fail('注册失败')
+                        // this.openLoading = false;
                     }
-                    console.log(response.data.code)
+                    console.log(response.data.code);
+                    this.openLoading = false;
                 })
                 .catch((error) => {
                     console.log(error)
