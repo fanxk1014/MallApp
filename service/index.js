@@ -22,28 +22,30 @@ router.use('/user',user.routes())
 app.use(router.routes())
 app.use(router.allowedMethods())
 
-// ;(async ()=>{
-//     await connect();
-//     initSchemas();
+//自执行函数
+;(async ()=>{
 
-//     const User = mongoose.model('User');
-//     let oneUser = new User({
-//         userName:'xiaokun',
-//         password:'123456'
-//     })
+    await connect();
+    initSchemas();
 
-//     //插入数据
-//     oneUser.save().then(()=>{
-//         console.log('---------------数据插入成功---------------');
-//     })
+    // const User = mongoose.model('User');
+    // let oneUser = new User({
+    //     userName:'xiaokun',
+    //     password:'123456'
+    // })
 
-//     //查询
-//     // let  users = await  User.findOne({}).exec()
-//     // console.log('------------------')
-//     // console.log(users)
-//     // console.log('------------------')
+    // //插入数据
+    // oneUser.save().then(()=>{
+    //     console.log('---------------数据插入成功---------------');
+    // })
 
-// })()
+    //查询
+    // let  users = await  User.findOne({}).exec()
+    // console.log('------------------')
+    // console.log(users)
+    // console.log('------------------')
+
+})()
 
 app.use(async(ctx)=>{
     ctx.body='<h3>koa2.</h3>'
