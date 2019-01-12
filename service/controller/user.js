@@ -43,15 +43,13 @@ router.post('/login',async(ctx)=>{
             //当用户名存在时，开始比对密码
             let newUser = new User();
             await newUser.comparePassword(password,result.password).then((isMatch)=>{
-                ctx.body = {
-                    code:200,
-                    message:isMatch
-                }
+                if(isMatch) ctx.body = {code:200,status:isMatch,message:'登陆成功'}
+                else ctx.body = {code:200,status:false,message:'密码错误'}
             }).catch(error=>{
                 console.log(error);
                 ctx.body = {
                     code:500,
-                    message:error
+                    message:'密码错误'
                 }
             })
         }else{

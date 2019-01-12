@@ -65,10 +65,17 @@
                 })
                 .then(response => {
                     console.log(response);
-                    this.openLoading = false;
+                    if(response.data.code==200 && response.data.status){
+                        Toast.success('登录成功');
+                        this.$router.push('/');
+                    }else{
+                        Toast.fail(response.data.message);
+                        this.openLoading = false;
+                    }
                 })
                 .catch((error) => {
                     console.log(error);
+                    Toast.fail('登录失败');
                     this.openLoading = false;
                 })
             },

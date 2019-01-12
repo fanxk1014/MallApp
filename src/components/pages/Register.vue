@@ -71,14 +71,13 @@
                     //如果返回code为200，代表注册成功，我们给用户作Toast提示
                     if(response.data.code == 200){
                         Toast.success('注册成功');
-                        // this.$router.push('/');
+                        this.$router.push('/');
                     }else{
                         console.log(response.data.message)
                         Toast.fail('注册失败')
-                        // this.openLoading = false;
+                        this.openLoading = false;
                     }
                     console.log(response.data.code);
-                    this.openLoading = false;
                 })
                 .catch((error) => {
                     console.log(error);
