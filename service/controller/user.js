@@ -1,13 +1,10 @@
 const mongoose = require('mongoose')
 const Router = require ('koa-router')
 let router = new Router()
+
 router.get('/',async(ctx)=>{
     ctx.body="这是用户user操作首页"
 })
-// router.post('/register',async(ctx)=>{
-//     console.log(ctx.request.body)
-//     ctx.body= ctx.request.body
-// })
 
 //注册接口
 router.post('/register',async(ctx)=>{

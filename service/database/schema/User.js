@@ -35,10 +35,16 @@ userSchema.pre('save', function(next){
     })
 })
 
+//在实例方法里，增加密码比对方法
 userSchema.methods = {
-    //登录密码比对
+    /**
+     * 登录密码比对
+     * _password:前端输入的密码
+     * password:数据库查出的密码
+     *  */
     comparePassword:(_password,password)=>{
         return new Promise((resolve,reject)=>{
+            //bcrypt提供了比对方法
             bcrypt.compare(_password,password,(err,isMatch)=>{
                 if(!err) resolve(isMatch)
                 else reject(err)
