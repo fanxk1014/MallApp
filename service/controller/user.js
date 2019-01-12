@@ -9,6 +9,7 @@ router.get('/',async(ctx)=>{
 //     ctx.body= ctx.request.body
 // })
 
+//注册接口
 router.post('/register',async(ctx)=>{
     //取得Model
     const User = mongoose.model('User')
@@ -24,6 +25,47 @@ router.post('/register',async(ctx)=>{
     }).catch(error=>{
          //失败返回code=500，并返回错误信息
         ctx.body={
+            code:500,
+            message:error
+        }
+    })
+})
+
+//注册接口
+router.post('/login',async(ctx)=>{
+    //得到前端传的数据
+    let loginUser = ctx.request.body;
+    console.log(loginUser);
+    let userName = loginUser.userName;
+    let password = loginUser.password;
+
+    const User = mongoose.model('User');
+    await User.findOne({userName:userName}).exec().then(async(result)=>{
+        console.log(result);
+        if(result){
+            //当用户名存在时，开始比对密码
+            let newUser = new User();
+            await newUser.comparePassword(password,result.password).then((isMatch)=>{
+                ctx.body = {
+                    code:200,
+                    message:isMatch
+                }
+            }).catch(error=>{
+                console.log(error);
+                ctx.body = {
+                    code:500,
+                    message:error
+                }
+            })
+        }else{
+            ctx.body = {
+                code:200,
+                message:'用户名不存在'
+            }
+        }
+    }).catch(error=>{
+        console.log(error);
+        ctx.body = {
             code:500,
             message:error
         }

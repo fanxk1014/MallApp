@@ -1,14 +1,12 @@
 <template>
     <div>
-
-        <van-nav-bar
-        title="用户注册"
-        left-text="返回"
-        left-arrow
-        @click-left="goBack"
-        />
-
-        <div class="register-panel">
+         <van-nav-bar
+            title="用户登录"
+            left-text="返回"
+            left-arrow
+            @click-left="goBack"
+            />
+        <div class="login-panel">
             <van-field
                 v-model="username"
                 label="用户名"
@@ -26,11 +24,10 @@
                 :error-message="passwordErrorMsg"
                 required
             />
-            <div class="register-button">
-                <van-button type="primary" class="register-btn" :loading="openLoading" size="large" @click="registerAction">注册</van-button>
+            <div class="login-button">
+                <van-button type="primary" class="login-btn" @click="loginAction" :loading="openLoading" size="large">登录</van-button>
             </div>
-       </div>
-
+        </div>
     </div>
 </template>
 
@@ -50,16 +47,16 @@
             goBack() {
                 this.$router.go(-1);
             },
-            registerAction(){
+            loginAction(){
                 // if(this.checkForm()){
                 //     this.axiosRegisterUser()
                 // }
-                this.checkForm() && this.axiosRegisterUser()
+                this.checkForm() && this.axiosLoginUser()
             },
-            axiosRegisterUser(){
+            axiosLoginUser(){
                 this.openLoading = true;
                 this.axios({
-                    url: this.$url.registerUser,
+                    url: this.$url.loginUser,
                     method: 'post',
                     data:{
                         userName:this.username,
@@ -68,21 +65,10 @@
                 })
                 .then(response => {
                     console.log(response);
-                    //如果返回code为200，代表注册成功，我们给用户作Toast提示
-                    if(response.data.code == 200){
-                        Toast.success('注册成功');
-                        // this.$router.push('/');
-                    }else{
-                        console.log(response.data.message)
-                        Toast.fail('注册失败')
-                        // this.openLoading = false;
-                    }
-                    console.log(response.data.code);
                     this.openLoading = false;
                 })
                 .catch((error) => {
                     console.log(error);
-                    Toast.fail('注册失败')
                     this.openLoading = false;
                 })
             },
@@ -107,16 +93,16 @@
 </script>
 
 <style scoped>
-    .register-panel{
+    .login-panel{
         width:96%;
         border-radius: 5px;
         margin:20px auto;
         padding-bottom:50px;
     }
-    .register-button{
+    .login-button{
         padding-top:10px;
     }
-    .register-btn{
+    .login-btn{
         background: #4291ab;
         border: #4291ab;
     }
