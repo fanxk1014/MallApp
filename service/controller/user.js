@@ -28,7 +28,7 @@ router.post('/register',async(ctx)=>{
     })
 })
 
-//注册接口
+//登陆接口
 router.post('/login',async(ctx)=>{
     //得到前端传的数据
     let loginUser = ctx.request.body;
