@@ -12,11 +12,15 @@ app.use(bodyParse())
 //用于跨域
 app.use(cors())
 
-let user = require('./controller/user.js')
 let router = new Router()
 
-//装在user下所有子路由
+//引入controller各路由模块
+let user = require('./controller/user.js')
+let goods = require('./controller/goods.js')
+
+//装载controller各路由模块下的所有子路由
 router.use('/user',user.routes())
+router.use('/goods',user.routes())
 
 //加载路由中间件
 app.use(router.routes())

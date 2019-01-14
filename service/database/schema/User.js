@@ -20,7 +20,7 @@ const userSchema = new Schema({
         Default:Date.now()
     }
 },{
-    collection:'user'
+    collection:'users'
 })
 
 userSchema.pre('save', function(next){
