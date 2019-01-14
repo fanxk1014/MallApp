@@ -1,5 +1,5 @@
 const fs = require('fs')
-fs.readFile('./data_json/goods.json', 'utf8', function(err, data){
+fs.readFile('./data_json/goods.json','utf8',function(err, data){
     let newData= JSON.parse(data);
     let i=0;
     let pushData=[];

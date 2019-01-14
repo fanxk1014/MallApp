@@ -20,7 +20,7 @@ let goods = require('./controller/goods.js')
 
 //装载controller各路由模块下的所有子路由
 router.use('/user',user.routes())
-router.use('/goods',user.routes())
+router.use('/goods',goods.routes())
 
 //加载路由中间件
 app.use(router.routes())
