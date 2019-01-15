@@ -45,4 +45,25 @@ router.get('/insertAllCategoriesInfo',async(ctx)=>{
 
 })
 
+router.get('/insertAllCategorySubInfo',async(ctx)=>{
+
+    fs.readFile('./data_json/category_sub.json','utf8',(err,data)=>{
+        data = JSON.parse(data)
+        let saveCount = 0;
+        const CategorySub = mongoose.model('CategorySub');
+        data.RECORDS.map((value,index)=>{
+            console.log(value);
+            let newCategorySub = CategorySub(value);
+            newCategorySub.save().then(()=>{
+                saveCount++;
+                console.log('成功'+saveCount);
+            }).catch(error=>{
+                console.log('失败'+saveCount);
+            })
+        });
+        ctx.body='开始导入数据';
+    })
+
+})
+
 module.exports=router
