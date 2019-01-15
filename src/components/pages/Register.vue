@@ -72,6 +72,7 @@
                     if(response.data.code == 200){
                         Toast.success('注册成功');
                         // this.$router.push('/');
+                        this.openLoading = false;
                     }else{
                         console.log(response.data.message)
                         Toast.fail('注册失败')
