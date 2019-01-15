@@ -5,9 +5,9 @@ import App from './App'
 import router from './router'
 import axios from 'axios'
 import URL from '@/serviceAPI.config.js'
-import {Button, Row, Col, Swipe, SwipeItem, Lazyload, List, Field, NavBar } from 'vant'
+import {Button, Row, Col, Swipe, SwipeItem, Lazyload, List, Field, NavBar, Tab, Tabs } from 'vant'
 
-Vue.use(Button).use(Row).use(Col).use(Swipe).use(SwipeItem).use(Lazyload).use(List).use(Field).use(NavBar)
+Vue.use(Button).use(Row).use(Col).use(Swipe).use(SwipeItem).use(Lazyload).use(List).use(Field).use(NavBar).use(Tab).use(Tabs)
 Vue.prototype.axios = axios
 Vue.prototype.$url = URL
 Vue.config.productionTip = false
