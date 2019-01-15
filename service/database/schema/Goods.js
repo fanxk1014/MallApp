@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema
 let ObjectId = Schema.Types.ObjectId    //声明Object类型
 
 const goodsSchema = new Schema({

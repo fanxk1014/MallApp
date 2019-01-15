@@ -3,6 +3,9 @@ const fs = require('fs')
 const Router = require('koa-router')
 let router = new Router()
 
+/**
+ * 插入所有商品信息
+ *  */
 router.get('/insertAllGoodsInfo',async(ctx)=>{
 
     fs.readFile('./data_json/newGoods.json','utf8',(err,data)=>{
@@ -24,6 +27,9 @@ router.get('/insertAllGoodsInfo',async(ctx)=>{
 
 })
 
+/**
+ * 插入所有商品分类信息
+ *  */
 router.get('/insertAllCategoriesInfo',async(ctx)=>{
 
     fs.readFile('./data_json/category.json','utf8',(err,data)=>{
@@ -45,8 +51,11 @@ router.get('/insertAllCategoriesInfo',async(ctx)=>{
 
 })
 
+/**
+ * 插入所有商品子类信息
+ *  */
 router.get('/insertAllCategorySubInfo',async(ctx)=>{
-
+    
     fs.readFile('./data_json/category_sub.json','utf8',(err,data)=>{
         data = JSON.parse(data)
         let saveCount = 0;
@@ -63,6 +72,30 @@ router.get('/insertAllCategorySubInfo',async(ctx)=>{
         });
         ctx.body='开始导入数据';
     })
+
+})
+
+/**
+ * 获取商品详情接口
+ *  */
+router.post('/getGoodsDetailInfo',async(ctx)=>{
+
+    try{
+        let goodsId = ctx.request.body.goodsId;
+        const Goods = mongoose.model('Goods');
+        let result = await Goods.findOne({ID:goodsId}).exec();
+        ctx.body={
+            code:200,
+            status:true,
+            data:result
+        }
+    }catch(error){
+        ctx.body={
+            code:500,
+            status:false,
+            data:err
+        }
+    }
 
 })
 
