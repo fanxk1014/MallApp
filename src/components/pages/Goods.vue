@@ -12,23 +12,59 @@
         </div>
 
         <div class="goods-name">{{goodsInfo.NAME}}</div>
-        <div class="goods-price">价格：{{goodsInfo.PRESENT_PRICE}}</div>
+        <div class="goods-price">价格：￥{{goodsInfo.PRESENT_PRICE | moneyFilter}}元</div>
         <div>
-            <van-tabs >
+            <van-tabs swipeable sticky>
             <van-tab title="商品详情">
             <div class="detail" v-html="goodsInfo.DETAIL">
             </div>
             </van-tab>
             <van-tab title="评价">
-                非常好吃
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                <p>非常好吃</p>
+                
             </van-tab>
             </van-tabs>
+        </div>
+
+        <div class="goods-bottom">
+            <div>
+                <van-button size="large" class="add-to-cart" type="primary">加入购物车</van-button>
+            </div>
+            <div>
+                <van-button size="large" type="danger">直接购买</van-button>
+            </div>
         </div>
 
     </div>
 </template>
 <script>
     import { Toast } from 'vant'
+    import {toMoney} from '@/filter/moneyFilter.js'
     export default {
         data() {
             return {
@@ -40,6 +76,11 @@
             this.goodsId= this.$route.query.goodsId;
             console.log(this.goodsId);
             this.getInfo();
+        },
+        filters:{
+            moneyFilter(money){
+                return toMoney(money)
+            }  
         },
         methods: {
             goBack() {
@@ -79,5 +120,23 @@
     }
     .goods-price{
         background-color: #fff;
+    }
+    .goods-bottom{
+        position: fixed;
+        bottom:0px;
+        left:0px;
+        background-color: #FFF;
+        width:100%;
+        display: flex;
+        flex-direction: row;
+        flex-flow: nowrap;
+    }
+    .add-to-cart{
+        background-color: #f8b82f;
+            border: 1px solid #f8b82f;
+    }
+    .goods-bottom > div{
+        flex:1;
+        padding:5px;
     }
 </style>
