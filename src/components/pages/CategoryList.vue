@@ -8,7 +8,11 @@
             <van-row>
                 <van-col span="6">
                     <div id="leftNav">
-                        左侧导航
+                        <ul>
+                            <li @click="clickCategory(index,item.ID)" :class="{categoryActice:categoryIndex==index}" v-for="(item , index) in category" :key="index">
+                                {{item.MALL_CATEGORY_NAME}}
+                            </li>
+                        </ul>
                     </div>
                 </van-col>
                 <van-col span="18">右侧列表</van-col>
@@ -24,6 +28,16 @@
         created(){
             this.getCategory();
         },
+        mounted(){
+            let winHeight = document.documentElement.clientHeight
+            document.getElementById("leftNav").style.height= winHeight-46 +'px'
+        },
+        data() {
+            return {
+                category:[], 
+                categoryIndex:0, 
+            }
+        },
         methods:{
             getCategory() {
                 this.axios({
@@ -32,14 +46,19 @@
                 })
                 .then(response=>{
                     console.log(response)
-                    if(response.data.code == 200 && response.data.message ){
+                    if(response.data.code == 200 && response.data.data ){
+                        this.category=response.data.data;
                     }else{
-                        Toast('服务器错误，数据取得失败')
+                        Toast('服务器错误，数据取得失败');
                     }
                 })
                 .catch(error=>{
                     console.log(error)
                 }) 
+            },
+            clickCategory(index){
+                console.log(index)
+                this.categoryIndex=index;
             }
         }
     }
@@ -56,7 +75,7 @@
         font-size:0.8rem;
         text-align: center;
     }
-    .categoryActice{
+    .categoryActive{
         background-color: #fff;
     }
     .list-item{
