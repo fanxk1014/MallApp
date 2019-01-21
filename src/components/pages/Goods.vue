@@ -64,7 +64,7 @@
 </template>
 <script>
     import { Toast } from 'vant'
-    import {toMoney} from '@/filter/moneyFilter.js'
+    import { toMoney } from '@/filter/moneyFilter.js'
     export default {
         data() {
             return {
@@ -121,7 +121,7 @@
                     //重新组成添加到购物车的信息
                     let newGoodsInfo={
                         goodsId:this.goodsInfo.ID,
-                        Name:this.goodsInfo.Name,
+                        name:this.goodsInfo.NAME,
                         price:this.goodsInfo.PRESENT_PRICE,
                         image:this.goodsInfo.IMAGE1,
                         count:1
@@ -159,7 +159,7 @@
     }
     .add-to-cart{
         background-color: #f8b82f;
-            border: 1px solid #f8b82f;
+        border: 1px solid #f8b82f;
     }
     .goods-bottom > div{
         flex:1;
