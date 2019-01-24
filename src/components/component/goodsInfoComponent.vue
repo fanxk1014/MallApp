@@ -15,7 +15,7 @@
         filters:{
             moneyFilter(money){
                 return toMoney(money)
-            }  
+            }
         },
         methods: {
             goGoodsPage() {

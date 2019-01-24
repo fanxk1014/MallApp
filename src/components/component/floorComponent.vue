@@ -29,7 +29,7 @@
             }
         },
         created(){
-            //这里写得不到数据，应为数据是延迟返回的
+            //这里写得不到数据，因为数据是延迟返回的
         },
         watch:{
             floorData:function(val){
